@@ -194,7 +194,7 @@ fi`
       fs.writeFileSync(shellInfo.path, 'export PATH=${0:A:h}/bin:$PATH')
       return writeConfig('.zshrc', initContent)
     case 'fish':
-      fs.writeFileSync(shellInfo.path, 'set -U fish_user_paths /usr/local/bin $fish_user_paths')
+      fs.writeFileSync(shellInfo.path, 'set -U fish_user_paths (dirname (status --current-filename)) $fish_user_paths')
       return writeConfig('.config/fish/config.fish', `test -f '${shellInfo.path}' && source '${shellInfo.path}'`)
     default:
       const error = `Unable to set credential helper in PATH. We don't how to set the path for ${shellInfo.shell} shell.
